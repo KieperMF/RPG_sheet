@@ -116,7 +116,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              IconButton(
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.black,
+                child: IconButton(
                   onPressed: () {
                     setState(() {
                       charactersSheets.clear();
@@ -124,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   icon: const Icon(Icons.clear_rounded, color:Colors.white),
                   iconSize: 40),
-                  
+              ),
             ],
           ),
         ),
