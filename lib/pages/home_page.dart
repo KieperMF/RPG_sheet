@@ -16,48 +16,67 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Character Creation'),
+      ),
+      backgroundColor: Colors.blue[800],
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              SizedBox(
-                width: 200,
-                child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(hintText: "Name"),
+              Padding(
+                padding:const EdgeInsets.all(10),
+                child: Card(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding:const EdgeInsets.all(10),
+                        child: TextField(
+                          controller: nameController,
+                          decoration: const InputDecoration(
+                            hintText: "Name",
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:const EdgeInsets.all(10),
+                        child: TextField(
+                          controller: ageController,
+                          decoration: const InputDecoration(
+                            hintText: "age",
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      Padding(
+                        padding:const EdgeInsets.all(10),
+                        child: TextField(
+                          controller: classController,
+                          decoration: const InputDecoration(
+                            hintText: "Character Class",
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              charactersSheets.put(
+                                  'key_${nameController.text}',
+                                  Character(
+                                      name: nameController.text,
+                                      age: int.parse(ageController.text),
+                                      characterClass: classController.text));
+                            });
+                          },
+                          child: const Text('Add')),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                width: 200,
-                child: TextField(
-                  controller: ageController,
-                  decoration: const InputDecoration(hintText: "age"),
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: TextField(
-                  controller: classController,
-                  decoration:
-                      const InputDecoration(hintText: "Character Class"),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      charactersSheets.put(
-                        'key_${nameController.text}',
-                        Character(
-                            name: nameController.text,
-                            age: int.parse(ageController.text),
-                            characterClass: classController.text));
-                    });
-                  },
-                  child: const Text('Add'))
+              
             ],
           ),
         ),
