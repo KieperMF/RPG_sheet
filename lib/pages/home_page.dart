@@ -115,7 +115,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              )
+              ),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      charactersSheets.clear();
+                    });
+                  },
+                  icon: const Icon(Icons.clear_rounded, color:Colors.white),
+                  iconSize: 40),
+                  
             ],
           ),
         ),
