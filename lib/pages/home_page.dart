@@ -83,16 +83,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              
-              SingleChildScrollView(
-                  child: Padding(
+              Padding(
                 padding: const EdgeInsets.all(5),
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics:const BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: charactersSheets.length,
                       itemBuilder: (context, index) {
                         Character character = charactersSheets.getAt(index);
@@ -104,14 +102,20 @@ class _HomePageState extends State<HomePage> {
                                 });
                               },
                               icon: const Icon(Icons.remove)),
-                          title: Text(character.name, style:const TextStyle(fontSize: 16),),
-                          trailing: Text(character.characterClass, style:const TextStyle(fontSize: 16),),
+                          title: Text(
+                            character.name,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          trailing: Text(
+                            character.characterClass,
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         );
                       },
                     ),
                   ),
                 ),
-              ))
+              )
             ],
           ),
         ),
