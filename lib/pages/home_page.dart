@@ -73,6 +73,9 @@ class _HomePageState extends State<HomePage> {
                                       name: nameController.text,
                                       age: int.parse(ageController.text),
                                       characterClass: classController.text));
+                              nameController.clear();
+                              ageController.clear();
+                              classController.clear();
                             });
                           },
                           child: const Text('Add')),
@@ -81,6 +84,34 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               
+              SingleChildScrollView(
+                  child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics:const BouncingScrollPhysics(),
+                      itemCount: charactersSheets.length,
+                      itemBuilder: (context, index) {
+                        Character character = charactersSheets.getAt(index);
+                        return ListTile(
+                          leading: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  charactersSheets.deleteAt(index);
+                                });
+                              },
+                              icon: const Icon(Icons.remove)),
+                          title: Text(character.name, style:const TextStyle(fontSize: 16),),
+                          trailing: Text(character.characterClass, style:const TextStyle(fontSize: 16),),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ))
             ],
           ),
         ),
