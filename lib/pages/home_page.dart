@@ -19,42 +19,46 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Character Creation'),
       ),
-      backgroundColor: Colors.blue[800],
+      backgroundColor: Colors.blue[900],
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
               Padding(
-                padding:const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Card(
                   child: Column(
                     children: [
                       Padding(
-                        padding:const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: TextField(
                           controller: nameController,
                           decoration: const InputDecoration(
                             hintText: "Name",
                           ),
+                          autofocus: true,
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                       Padding(
-                        padding:const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: TextField(
                           controller: ageController,
                           decoration: const InputDecoration(
                             hintText: "age",
                           ),
                           keyboardType: TextInputType.number,
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                       Padding(
-                        padding:const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: TextField(
                           controller: classController,
                           decoration: const InputDecoration(
                             hintText: "Character Class",
                           ),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                       const SizedBox(
