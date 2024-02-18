@@ -128,6 +128,7 @@ class _HomePageState extends State<HomePage> {
                         radius: 30,
                         backgroundColor: Colors.black,
                         child: IconButton(
+                          tooltip: 'Deletar Todos',
                             onPressed: () {
                               setState(() {
                                 charactersSheets.clear();
@@ -135,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             icon: const Icon(Icons.clear_rounded,
                                 color: Colors.white),
-                            iconSize: 40),
+                            iconSize: 40, ),
                       ),
                     ],
                   )),
