@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Character Creation'),
+        title: const Text('Criação de Personagem'),
       ),
       backgroundColor: Colors.blue[900],
       body: SingleChildScrollView(
@@ -30,37 +30,47 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(15),
                         child: TextField(
                           controller: nameController,
                           decoration: const InputDecoration(
-                            hintText: "Name",
+                            hintText: "Nome",
                           ),
                           autofocus: true,
                           style: const TextStyle(fontSize: 18),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(15),
                         child: TextField(
                           controller: ageController,
                           decoration: const InputDecoration(
-                            hintText: "age",
+                            hintText: "Idade",
                           ),
+                          textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
                           style: const TextStyle(fontSize: 18),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: TextField(
-                          controller: classController,
-                          decoration: const InputDecoration(
-                            hintText: "Character Class",
-                          ),
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ),
+                          padding: const EdgeInsets.all(15),
+                          child: DropdownButton<String>(
+                              value: selectedClass,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  classController.text = newValue!;
+                                });
+                              },
+                              items: classes.map<DropdownMenuItem<String>>(
+                                  (String classe) {
+                                return DropdownMenuItem<String>(
+                                    value: classe,
+                                    child: Text(
+                                      classe,
+                                      style: const TextStyle(fontSize: 18),
+                                    ));
+                              }).toList())),
                       const SizedBox(
                         height: 15,
                       ),
@@ -84,50 +94,54 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(5),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: charactersSheets.length,
-                      itemBuilder: (context, index) {
-                        Character character = charactersSheets.getAt(index);
-                        return ListTile(
-                          leading: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  charactersSheets.deleteAt(index);
-                                });
-                              },
-                              icon: const Icon(Icons.remove)),
-                          title: Text(
-                            character.name,
-                            style: const TextStyle(fontSize: 16),
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: charactersSheets.length,
+                            itemBuilder: (context, index) {
+                              Character character = charactersSheets.getAt(index);
+                              return ListTile(
+                                leading: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        charactersSheets.deleteAt(index);
+                                      });
+                                    },
+                                    icon: const Icon(Icons.remove)),
+                                title: Text(
+                                  character.name,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                trailing: Text(
+                                  character.characterClass,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              );
+                            },
                           ),
-                          trailing: Text(
-                            character.characterClass,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              CircleAvatar(
-                radius: 30,
-                backgroundColor: Colors.black,
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      charactersSheets.clear();
-                    });
-                  },
-                  icon: const Icon(Icons.clear_rounded, color:Colors.white),
-                  iconSize: 40),
-              ),
+                        ),
+                      ),
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.black,
+                        child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                charactersSheets.clear();
+                              });
+                            },
+                            icon: const Icon(Icons.clear_rounded,
+                                color: Colors.white),
+                            iconSize: 40),
+                      ),
+                    ],
+                  )),
             ],
           ),
         ),
