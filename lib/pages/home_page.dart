@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var nameController = TextEditingController();
   var ageController = TextEditingController();
-  var classController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,11 +58,10 @@ class _HomePageState extends State<HomePage> {
                               value: selectedClass,
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  classController.text = newValue!;
+                                  selectedClass = newValue!;
                                 });
                               },
-                              items: classes.map<DropdownMenuItem<String>>(
-                                  (String classe) {
+                              items: classes.map<DropdownMenuItem<String>>((String classe) {
                                 return DropdownMenuItem<String>(
                                     value: classe,
                                     child: Text(
@@ -82,10 +80,9 @@ class _HomePageState extends State<HomePage> {
                                   Character(
                                       name: nameController.text,
                                       age: int.parse(ageController.text),
-                                      characterClass: classController.text));
+                                      characterClass: selectedClass));
                               nameController.clear();
                               ageController.clear();
-                              classController.clear();
                             });
                           },
                           child: const Text('Add')),
