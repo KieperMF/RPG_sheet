@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rpg_sheet/boxes.dart';
 
-class AlertCustom extends StatefulWidget {
+class AlertCustom extends StatelessWidget {
   const AlertCustom({super.key});
 
-  @override
-  State<AlertCustom> createState() => _AlertState();
-}
-
-class _AlertState extends State<AlertCustom> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

@@ -21,13 +21,13 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('Criação de Personagem'),
         ),
-        backgroundColor: Colors.indigo[800],
+        backgroundColor: Colors.grey[700],
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 Padding(
-                  padding:const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Card(
                     color: Colors.lime[50],
                     child: Column(
