@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rpg_sheet/boxes.dart';
 import 'package:rpg_sheet/model_hive/character_model.dart';
+import 'package:rpg_sheet/pages/character_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -151,6 +152,13 @@ class _HomePageState extends State<HomePage> {
             child: SingleChildScrollView(
                 child: Column(
           children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: Text(
+                "Selecione a Ficha",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
             ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
@@ -161,40 +169,68 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Text(
-                          character.name,
-                          style: const TextStyle(fontSize: 18),
+                        SizedBox(
+                          width: 100,
+                          child: Text(
+                            character.name,
+                            style: const TextStyle(fontSize: 18),
+                          ),
                         ),
-                        const Padding(padding: EdgeInsets.all(15)),
-                        Text(
-                          character.characterClass,
-                          style: const TextStyle(fontSize: 18),
+                        SizedBox(
+                          width: 100,
+                          child: Text(
+                            character.characterClass,
+                            style: const TextStyle(fontSize: 18),
+                          ),
                         ),
-                        const Padding(padding: EdgeInsets.all(15)),
-                        IconButton(onPressed: (){
-                          characterSelected = charactersSheets.getAt(index);
-                        }, icon:const Icon(Icons.add_box_rounded))
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: IconButton(
+                              onPressed: () {
+                                characterSelected =
+                                    charactersSheets.getAt(index);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CharacterPage()));
+                              },
+                              icon: const Icon(
+                                Icons.pageview_rounded,
+                                size: 40,
+                              )),
+                        )
                       ],
                     ));
               },
             ),
-            SizedBox(
-              height: 45,
-              child: CircleAvatar(
-              radius: 30,
-              backgroundColor: Colors.black,
-              child: IconButton(
-                tooltip: 'Deletar Todos',
-                onPressed: () {
-                  setState(() {
-                    charactersSheets.clear();
-                  });
-                },
-                icon: const Icon(Icons.clear_rounded, color: Colors.white),
-                iconSize: 30,
-              ),
-            ),
-            )
+            if (charactersSheets.isNotEmpty) ...[
+              SizedBox(
+                height: 45,
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.black,
+                  child: IconButton(
+                    tooltip: 'Deletar Todos',
+                    onPressed: () {
+                      setState(() {
+                        charactersSheets.clear();
+                      });
+                    },
+                    icon: const Icon(Icons.clear_rounded, color: Colors.white),
+                    iconSize: 30,
+                  ),
+                ),
+              )
+            ] else ...[
+              const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                  "Nenhuma Ficha foi Encontrada",
+                  style: TextStyle(fontSize: 18),
+                ),
+              )
+            ],
           ],
         ))));
   }
