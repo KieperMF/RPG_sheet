@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rpg_sheet/boxes.dart';
+import 'package:rpg_sheet/custom_widgets.dart/alert.dart';
 import 'package:rpg_sheet/model_hive/character_model.dart';
 import 'package:rpg_sheet/pages/character_page.dart';
 
@@ -199,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                                 Icons.pageview_rounded,
                                 size: 40,
                               )),
-                        )
+                        ),
                       ],
                     ));
               },
@@ -214,7 +215,11 @@ class _HomePageState extends State<HomePage> {
                     tooltip: 'Deletar Todos',
                     onPressed: () {
                       setState(() {
-                        charactersSheets.clear();
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AlertCustom();
+                            });
                       });
                     },
                     icon: const Icon(Icons.clear_rounded, color: Colors.white),
