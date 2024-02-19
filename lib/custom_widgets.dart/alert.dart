@@ -18,9 +18,7 @@ class _AlertState extends State<AlertCustom> {
           Navigator.of(context).pop();
         }, child:const Text("Cancelar")),
         TextButton(onPressed: (){
-          setState(() {
             charactersSheets.clear();
-          });
           Navigator.of(context).pop();
         }, child:const Text("Excluir"))
       ],

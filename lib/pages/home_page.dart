@@ -21,14 +21,15 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('Criação de Personagem'),
         ),
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.indigo[800],
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding:const EdgeInsets.all(10),
                   child: Card(
+                    color: Colors.lime[50],
                     child: Column(
                       children: [
                         Padding(
@@ -38,7 +39,6 @@ class _HomePageState extends State<HomePage> {
                             decoration: const InputDecoration(
                               hintText: "Nome",
                             ),
-                            autofocus: true,
                             style: const TextStyle(fontSize: 18),
                             textAlign: TextAlign.center,
                           ),
@@ -112,6 +112,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Card(
+                          color: Colors.lime.shade50,
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: ListView.builder(
@@ -189,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         SizedBox(
-                          width: 100,
+                          width: 90,
                           child: Text(
                             character.name,
                             style: const TextStyle(fontSize: 18),
@@ -203,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5),
+                          padding: const EdgeInsets.only(left: 10),
                           child: IconButton(
                               onPressed: () {
                                 characterSelected =
