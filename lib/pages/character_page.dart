@@ -17,7 +17,11 @@ class _CharacterPageState extends State<CharacterPage> {
       ),
       body: Center(
         child: Column(
-          children: [Text(characterSelected.name)],
+          children: [
+            Text(characterSelected.name),
+            Text(characterSelected.characterClass),
+            Text(characterSelected.race)
+            ],
         ),
       ),
     );

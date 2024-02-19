@@ -7,7 +7,8 @@ class Character{
   Character({
     required this.name,
     required this.age,
-    required this.characterClass
+    required this.characterClass,
+    required this.race
   });
 
   @HiveField(0)
@@ -18,4 +19,7 @@ class Character{
 
   @HiveField(2)
   String characterClass;
+
+  @HiveField(3)
+  String race;
 }

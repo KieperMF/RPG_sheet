@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var nameController = TextEditingController();
   var ageController = TextEditingController();
+  var raceController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +56,17 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: TextField(
+                            controller: raceController,
+                            decoration: const InputDecoration(
+                              hintText: "Raça",
+                            ),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        Padding(
                             padding: const EdgeInsets.all(15),
                             child: DropdownButton<String>(
                                 value: selectedClass,
@@ -83,9 +95,11 @@ class _HomePageState extends State<HomePage> {
                                     Character(
                                         name: nameController.text,
                                         age: int.parse(ageController.text),
-                                        characterClass: selectedClass));
+                                        characterClass: selectedClass,
+                                        race: raceController.text));
                                 nameController.clear();
                                 ageController.clear();
+                                raceController.clear();
                               });
                             },
                             child: const Text('Add')),
@@ -135,7 +149,11 @@ class _HomePageState extends State<HomePage> {
                             tooltip: 'Deletar Todos',
                             onPressed: () {
                               setState(() {
-                                charactersSheets.clear();
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const AlertCustom();
+                                    });
                               });
                             },
                             icon: const Icon(Icons.clear_rounded,
