@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   var nameController = TextEditingController();
   var ageController = TextEditingController();
   var raceController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,6 +170,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         drawer: Drawer(
+          width: 350,
             child: SingleChildScrollView(
                 child: Column(
           children: [
@@ -220,8 +222,21 @@ class _HomePageState extends State<HomePage> {
                                 size: 40,
                               )),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: IconButton(
+                              onPressed: () {
+                                charactersSheets.deleteAt(index);
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                Icons.clear,
+                                size: 40,
+                              )),
+                        ),
                       ],
                     ));
+                    
               },
             ),
             if (charactersSheets.isNotEmpty) ...[
