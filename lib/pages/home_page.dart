@@ -236,7 +236,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ));
-                    
               },
             ),
             if (charactersSheets.isNotEmpty) ...[
