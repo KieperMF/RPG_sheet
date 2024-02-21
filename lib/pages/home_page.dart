@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   var nameController = TextEditingController();
   var ageController = TextEditingController();
   var raceController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,80 +32,103 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(10),
                   child: Card(
                     color: Colors.lime[50],
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: TextField(
-                            controller: nameController,
-                            decoration: const InputDecoration(
-                              hintText: "Nome",
-                            ),
-                            style: const TextStyle(fontSize: 18),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: TextField(
-                            controller: ageController,
-                            decoration: const InputDecoration(
-                              hintText: "Idade",
-                            ),
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: TextField(
-                            controller: raceController,
-                            decoration: const InputDecoration(
-                              hintText: "Raça",
-                            ),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        Padding(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.all(15),
-                            child: DropdownButton<String>(
-                                value: selectedClass,
-                                onChanged: (String? newValue) {
+                            child: TextFormField(
+                              controller: nameController,
+                              decoration: const InputDecoration(
+                                hintText: "Nome",
+                              ),
+                              style: const TextStyle(fontSize: 18),
+                              textAlign: TextAlign.center,
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return "Preencha o nome";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              controller: ageController,
+                              decoration: const InputDecoration(
+                                hintText: "Idade",
+                              ),
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              style: const TextStyle(fontSize: 18),
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return "Preencha a Idade";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              controller: raceController,
+                              decoration: const InputDecoration(
+                                hintText: "Raça",
+                              ),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(fontSize: 18),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Preencha a Raça";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: DropdownButton<String>(
+                                  value: selectedClass,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedClass = newValue!;
+                                    });
+                                  },
+                                  items: classes.map<DropdownMenuItem<String>>(
+                                      (String classe) {
+                                    return DropdownMenuItem<String>(
+                                        value: classe,
+                                        child: Text(
+                                          classe,
+                                          style: const TextStyle(fontSize: 18),
+                                        ));
+                                  }).toList())),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
                                   setState(() {
-                                    selectedClass = newValue!;
+                                    charactersSheets.put(
+                                        'key_${nameController.text}',
+                                        Character(
+                                            name: nameController.text,
+                                            age: ageController.text,
+                                            characterClass: selectedClass,
+                                            race: raceController.text));
+                                    nameController.clear();
+                                    ageController.clear();
+                                    raceController.clear();
                                   });
-                                },
-                                items: classes.map<DropdownMenuItem<String>>(
-                                    (String classe) {
-                                  return DropdownMenuItem<String>(
-                                      value: classe,
-                                      child: Text(
-                                        classe,
-                                        style: const TextStyle(fontSize: 18),
-                                      ));
-                                }).toList())),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              setState(() {
-                                charactersSheets.put(
-                                    'key_${nameController.text}',
-                                    Character(
-                                        name: nameController.text,
-                                        age: ageController.text,
-                                        characterClass: selectedClass,
-                                        race: raceController.text));
-                                nameController.clear();
-                                ageController.clear();
-                                raceController.clear();
-                              });
-                            },
-                            child: const Text('Add')),
-                      ],
+                                }
+                              },
+                              child: const Text('Add')),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -132,11 +156,11 @@ class _HomePageState extends State<HomePage> {
                                       },
                                       icon: const Icon(Icons.remove)),
                                   title: Text(
-                                    character.name!,
+                                    character.name,
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                   trailing: Text(
-                                    character.characterClass!,
+                                    character.characterClass,
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                 );
@@ -194,14 +218,14 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: 90,
                               child: Text(
-                                character.name!,
+                                character.name,
                                 style: const TextStyle(fontSize: 18),
                               ),
                             ),
                             SizedBox(
                               width: 100,
                               child: Text(
-                                character.characterClass!,
+                                character.characterClass,
                                 style: const TextStyle(fontSize: 18),
                               ),
                             ),
@@ -272,5 +296,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ],
             ))));
+  }
+
+  register() {
+    if (_formKey.currentState!.validate()) {}
   }
 }
