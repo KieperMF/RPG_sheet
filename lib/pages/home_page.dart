@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "";
+                                  return "Preencha o campo";
                                 }
                                 return null;
                               },
@@ -63,9 +63,10 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               style: const TextStyle(fontSize: 18),
+                              
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "";
+                                  return "Preencha o campo";
                                 }
                                 return null;
                               },
@@ -80,9 +81,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                               textAlign: TextAlign.center,
                               style: const TextStyle(fontSize: 18),
-                              validator: (value) {
+                              validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "";
+                                    return "Preencha o campo";
                                 }
                                 return null;
                               },
@@ -124,11 +125,6 @@ class _HomePageState extends State<HomePage> {
                                     ageController.clear();
                                     raceController.clear();
                                   });
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              "Preencha todos os campos")));
                                 }
                               },
                               child: const Text('Add')),
