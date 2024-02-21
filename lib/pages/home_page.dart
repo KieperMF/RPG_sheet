@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "Preencha o nome";
+                                  return "";
                                 }
                                 return null;
                               },
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                               style: const TextStyle(fontSize: 18),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "Preencha a Idade";
+                                  return "";
                                 }
                                 return null;
                               },
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                               style: const TextStyle(fontSize: 18),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return "Preencha a Raça";
+                                  return "";
                                 }
                                 return null;
                               },
@@ -124,6 +124,8 @@ class _HomePageState extends State<HomePage> {
                                     ageController.clear();
                                     raceController.clear();
                                   });
+                                }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Preencha todos os campos")));
                                 }
                               },
                               child: const Text('Add')),
