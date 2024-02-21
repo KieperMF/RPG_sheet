@@ -299,8 +299,4 @@ class _HomePageState extends State<HomePage> {
               ],
             ))));
   }
-
-  register() {
-    if (_formKey.currentState!.validate()) {}
-  }
 }
