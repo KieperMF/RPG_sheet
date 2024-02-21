@@ -17,10 +17,10 @@ class CharacterAdapter extends TypeAdapter<Character> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Character(
-      name: fields[0] as String,
-      age: fields[1] as int,
-      characterClass: fields[2] as String,
-      race: fields[3] as String,
+      name: fields[0] as String?,
+      age: fields[1] as String?,
+      characterClass: fields[2] as String?,
+      race: fields[3] as String?,
     );
   }
 

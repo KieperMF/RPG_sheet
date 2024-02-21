@@ -12,14 +12,14 @@ class Character{
   });
 
   @HiveField(0)
-  String name;
+  String? name;
 
   @HiveField(1)
-  int age;
+  String? age;
 
   @HiveField(2)
-  String characterClass;
+  String? characterClass;
 
   @HiveField(3)
-  String race;
+  String? race;
 }

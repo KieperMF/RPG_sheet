@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async{
   await Hive.initFlutter();
   Hive.registerAdapter(CharacterAdapter());
-  charactersSheets = await Hive.openBox<Character>('characterSheet');
+  charactersSheets = await Hive.openBox<Character>('charactersheet');
   runApp(const MyApp());
 }
 
