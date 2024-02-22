@@ -15,6 +15,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+            backgroundColor: Colors.grey[700],
             width: 350,
             child: SingleChildScrollView(
                 child: Column(
