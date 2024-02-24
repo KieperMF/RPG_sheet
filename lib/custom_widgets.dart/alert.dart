@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rpg_sheet/pages/home_page.dart';
+import 'package:rpg_sheet/management.dart';
 
 
 
@@ -11,6 +11,7 @@ class AlertCustom extends StatefulWidget {
 }
 
 class _AlertCustomState extends State<AlertCustom> {
+  final management = Management();
   
   @override
   Widget build(BuildContext context) {

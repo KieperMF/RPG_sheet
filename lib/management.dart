@@ -17,10 +17,11 @@ abstract class ManagementBase with Store {
 
   @observable
   Character? character;
-
+  
   @action
   deleteSelected(int index) {
-    //_characterService.(index);
+    _characterService.delete(index);
+    charactersSheets.removeAt(index);
   }
 
   @action
@@ -31,6 +32,6 @@ abstract class ManagementBase with Store {
 
   @action
   clear() {
-    charactersSheets.clear();
+    _characterService.clear();
   }
 }

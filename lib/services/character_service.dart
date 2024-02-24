@@ -19,4 +19,12 @@ class CharacterService{
             name: name, age: age, characterClass: characterClass, race: race));
     return _box!.get('key_$name');
   }
+
+  void delete(int index){
+    _box!.deleteAt(index);
+  }
+
+  void clear(){
+    _box!.clear();
+  }
 }

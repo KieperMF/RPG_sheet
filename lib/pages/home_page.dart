@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                               TextButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                        management!.add(
+                                        management.add(
                                             nameController.text,
                                             ageController.text,
                                             selectedClass,
@@ -158,12 +158,12 @@ class _HomePageState extends State<HomePage> {
                                           icon: const Icon(Icons.remove)),
                                       title: 
                                          Text(
-                                          management!.character!.name,
+                                          management.character!.name,
                                           style: const TextStyle(fontSize: 16),
                                         ),
                                       trailing: 
                                          Text(
-                                          management!.character!.characterClass,
+                                          management.character!.characterClass,
                                           style: const TextStyle(fontSize: 16),
                                         )
                                     );
@@ -193,8 +193,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-            )
-            /*drawer: const DrawerWidget()*/);
+            ),
+            drawer: const DrawerWidget());
       }
     );
   }
