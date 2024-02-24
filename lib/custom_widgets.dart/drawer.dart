@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
 import 'package:rpg_sheet/model_hive/character_model.dart';
 import 'package:rpg_sheet/pages/character_page.dart';
+import 'package:rpg_sheet/pages/home_page.dart';
+
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -19,7 +23,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         child: SingleChildScrollView(
             child: Column(
           children: [
-            const Padding(
+             if (management.charactersSheets!.isEmpty) ...[
+                const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                  "Nenhuma Ficha foi Encontrada",
+                  style: TextStyle(fontSize: 18),
+                ),
+              )
+            ] else if(management.charactersSheets!.isNotEmpty)...[
+              const Padding(
               padding: EdgeInsets.only(top: 40),
               child: Text(
                 "Selecione a Ficha",
@@ -29,33 +42,37 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
-              itemCount: charactersSheets.length,
+              itemCount: management.charactersSheets!.length,
               itemBuilder: (context, index) {
-                Character character = charactersSheets.getAt(index);
+                Character character = management.charactersSheets!.getAt(index);
                 return Padding(
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         SizedBox(
                           width: 90,
-                          child: Text(
+                          child: Observer(builder: (_){
+                            return Text(
                             character.name,
                             style: const TextStyle(fontSize: 18),
-                          ),
+                          );
+                          })
                         ),
                         SizedBox(
                           width: 100,
-                          child: Text(
+                          child: Observer(builder: (_){
+                            return Text(
                             character.characterClass,
                             style: const TextStyle(fontSize: 18),
-                          ),
+                          );
+                          })
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: IconButton(
                               onPressed: () {
                                 characterSelected =
-                                    charactersSheets.getAt(index);
+                                    management.charactersSheets!.getAt(index);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -71,8 +88,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           padding: const EdgeInsets.only(left: 10),
                           child: IconButton(
                               onPressed: () {
-                                charactersSheets.deleteAt(index);
-                                setState(() {});
+                                Observable(management.deleteSelected(index));
+                                
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -83,15 +100,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ));
               },
             ),
-            if (charactersSheets.isEmpty) ...[
-              const Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  "Nenhuma Ficha foi Encontrada",
-                  style: TextStyle(fontSize: 18),
-                ),
-              )
-            ]
+            ],
           ],
         )));
   }

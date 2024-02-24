@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
-import 'package:rpg_sheet/custom_widgets.dart/alert.dart';
 import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
-import 'package:rpg_sheet/model_hive/character_model.dart';
+import 'package:rpg_sheet/management.dart';
+
+final management = Management();
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Observer(builder: (_) => Scaffold(
         appBar: AppBar(
           title: const Text('Criação de Personagem'),
         ),
@@ -63,7 +65,6 @@ class _HomePageState extends State<HomePage> {
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               style: const TextStyle(fontSize: 18),
-                              
                               validator: (String? value) {
                                 if (value!.isEmpty) {
                                   return "Preencha o campo";
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                               style: const TextStyle(fontSize: 18),
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                    return "Preencha o campo";
+                                  return "Preencha o campo";
                                 }
                                 return null;
                               },
@@ -113,18 +114,15 @@ class _HomePageState extends State<HomePage> {
                           TextButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    charactersSheets.put(
-                                        'key_${nameController.text}',
-                                        Character(
-                                            name: nameController.text,
-                                            age: ageController.text,
-                                            characterClass: selectedClass,
-                                            race: raceController.text));
+                                    management.add(
+                                        nameController.text,
+                                        ageController.text,
+                                        selectedClass,
+                                        raceController.text);
                                     nameController.clear();
                                     ageController.clear();
                                     raceController.clear();
-                                  });
+                                  
                                 }
                               },
                               child: const Text('Add')),
@@ -144,56 +142,54 @@ class _HomePageState extends State<HomePage> {
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
-                              itemCount: charactersSheets.length,
+                              itemCount: management.charactersSheets!.length,
                               itemBuilder: (context, index) {
-                                Character character =
-                                    charactersSheets.getAt(index);
+                                  management.character =
+                                    management.charactersSheets!.getAt(index);
                                 return ListTile(
                                   leading: IconButton(
                                       onPressed: () {
-                                        setState(() {
-                                          charactersSheets.deleteAt(index);
-                                        });
+                                        management.deleteSelected(index);
                                       },
                                       icon: const Icon(Icons.remove)),
-                                  title: Text(
-                                    character.name,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                  trailing: Text(
-                                    character.characterClass,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
+                                  title: 
+                                     Text(
+                                      management.character!.name,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  trailing: 
+                                     Text(
+                                      management.character!.characterClass,
+                                      style: const TextStyle(fontSize: 16),
+                                    )
                                 );
                               },
                             ),
                           ),
                         ),
-                        CircleAvatar(
+                       /* CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.black,
                           child: IconButton(
                             tooltip: 'Deletar Todos',
                             onPressed: () {
-                              setState(() {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return const AlertCustom();
-                                    });
-                              });
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const AlertCustom();
+                                  });
                             },
                             icon: const Icon(Icons.clear_rounded,
                                 color: Colors.white),
                             iconSize: 40,
                           ),
-                        ),
+                        ),*/
                       ],
                     )),
               ],
             ),
           ),
         ),
-        drawer: const DrawerWidget());
+        drawer: const DrawerWidget()));
   }
 }

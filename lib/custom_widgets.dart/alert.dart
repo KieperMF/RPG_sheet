@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rpg_sheet/boxes.dart';
+import 'package:rpg_sheet/pages/home_page.dart';
+
+
 
 class AlertCustom extends StatefulWidget {
   const AlertCustom({super.key});
@@ -22,9 +24,7 @@ class _AlertCustomState extends State<AlertCustom> {
             child: const Text("Cancelar")),
         TextButton(
             onPressed: () {
-                setState(() {
-                charactersSheets.clear();
-                });
+                management.clear();
               Navigator.of(context).pop();
             },
             child: const Text("Excluir"))
