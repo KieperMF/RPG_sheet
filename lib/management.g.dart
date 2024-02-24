@@ -13,13 +13,13 @@ mixin _$Management on ManagementBase, Store {
       Atom(name: 'ManagementBase.charactersSheets', context: context);
 
   @override
-  Box<dynamic>? get charactersSheets {
+  ObservableList<Character> get charactersSheets {
     _$charactersSheetsAtom.reportRead();
     return super.charactersSheets;
   }
 
   @override
-  set charactersSheets(Box<dynamic>? value) {
+  set charactersSheets(ObservableList<Character> value) {
     _$charactersSheetsAtom.reportWrite(value, super.charactersSheets, () {
       super.charactersSheets = value;
     });

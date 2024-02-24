@@ -6,7 +6,7 @@ import 'package:rpg_sheet/model_hive/character_model.dart';
 import 'package:rpg_sheet/pages/character_page.dart';
 import 'package:rpg_sheet/pages/home_page.dart';
 
-
+/*
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
 
@@ -23,7 +23,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         child: SingleChildScrollView(
             child: Column(
           children: [
-             if (management.charactersSheets!.isEmpty) ...[
+             if (management!.charactersSheets!.isEmpty) ...[
                 const Padding(
                 padding: EdgeInsets.only(left: 15),
                 child: Text(
@@ -31,7 +31,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   style: TextStyle(fontSize: 18),
                 ),
               )
-            ] else if(management.charactersSheets!.isNotEmpty)...[
+            ] else if(management!.charactersSheets!.isNotEmpty)...[
               const Padding(
               padding: EdgeInsets.only(top: 40),
               child: Text(
@@ -42,9 +42,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
-              itemCount: management.charactersSheets!.length,
+              itemCount: management!.charactersSheets!.length,
               itemBuilder: (context, index) {
-                Character character = management.charactersSheets!.getAt(index);
+                management!.character = management!.charactersSheets!.removeAt(index);
                 return Padding(
                     padding: const EdgeInsets.all(10),
                     child: Row(
@@ -53,7 +53,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           width: 90,
                           child: Observer(builder: (_){
                             return Text(
-                            character.name,
+                            management!.character!.name,
                             style: const TextStyle(fontSize: 18),
                           );
                           })
@@ -62,7 +62,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           width: 100,
                           child: Observer(builder: (_){
                             return Text(
-                            character.characterClass,
+                            management!.character!.characterClass,
                             style: const TextStyle(fontSize: 18),
                           );
                           })
@@ -72,7 +72,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           child: IconButton(
                               onPressed: () {
                                 characterSelected =
-                                    management.charactersSheets!.getAt(index);
+                                    management!.charactersSheets!.removeAt(index);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -88,7 +88,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           padding: const EdgeInsets.only(left: 10),
                           child: IconButton(
                               onPressed: () {
-                                Observable(management.deleteSelected(index));
+                                Observable(management!.deleteSelected(index));
                                 
                               },
                               icon: const Icon(
@@ -105,3 +105,4 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         )));
   }
 }
+*/

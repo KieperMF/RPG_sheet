@@ -4,7 +4,7 @@ import 'package:rpg_sheet/boxes.dart';
 import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
 import 'package:rpg_sheet/management.dart';
 
-final management = Management();
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,178 +18,184 @@ class _HomePageState extends State<HomePage> {
   var ageController = TextEditingController();
   var raceController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final management = Management();
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Criação de Personagem'),
-        ),
-        backgroundColor: Colors.grey[700],
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Card(
-                    color: Colors.lime[50],
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: TextFormField(
-                              controller: nameController,
-                              decoration: const InputDecoration(
-                                hintText: "Nome",
-                              ),
-                              style: const TextStyle(fontSize: 18),
-                              textAlign: TextAlign.center,
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return "Preencha o campo";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: TextFormField(
-                              controller: ageController,
-                              decoration: const InputDecoration(
-                                hintText: "Idade",
-                              ),
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              style: const TextStyle(fontSize: 18),
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return "Preencha o campo";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: TextFormField(
-                              controller: raceController,
-                              decoration: const InputDecoration(
-                                hintText: "Raça",
-                              ),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 18),
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return "Preencha o campo";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: DropdownButton<String>(
-                                  value: selectedClass,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      selectedClass = newValue!;
-                                    });
+    return Observer(
+      builder: (context) {
+        return Scaffold(
+            appBar: AppBar(
+              title: const Text('Criação de Personagem'),
+            ),
+            backgroundColor: Colors.grey[700],
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Card(
+                        color: Colors.lime[50],
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: TextFormField(
+                                  controller: nameController,
+                                  decoration: const InputDecoration(
+                                    hintText: "Nome",
+                                  ),
+                                  style: const TextStyle(fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                  validator: (String? value) {
+                                    if (value!.isEmpty) {
+                                      return "Preencha o campo";
+                                    }
+                                    return null;
                                   },
-                                  items: classes.map<DropdownMenuItem<String>>(
-                                      (String classe) {
-                                    return DropdownMenuItem<String>(
-                                        value: classe,
-                                        child: Text(
-                                          classe,
-                                          style: const TextStyle(fontSize: 18),
-                                        ));
-                                  }).toList())),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                    management.add(
-                                        nameController.text,
-                                        ageController.text,
-                                        selectedClass,
-                                        raceController.text);
-                                    nameController.clear();
-                                    ageController.clear();
-                                    raceController.clear();
-                                  
-                                }
-                              },
-                              child: const Text('Add')),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Card(
-                          color: Colors.lime.shade50,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: management.charactersSheets!.length,
-                              itemBuilder: (context, index) {
-                                  management.character =
-                                    management.charactersSheets!.getAt(index);
-                                return ListTile(
-                                  leading: IconButton(
-                                      onPressed: () {
-                                        management.deleteSelected(index);
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: TextFormField(
+                                  controller: ageController,
+                                  decoration: const InputDecoration(
+                                    hintText: "Idade",
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(fontSize: 18),
+                                  validator: (String? value) {
+                                    if (value!.isEmpty) {
+                                      return "Preencha o campo";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              Padding(
+                
+                                padding: const EdgeInsets.all(15),
+                                child: TextFormField(
+                                  controller: raceController,
+                                  decoration: const InputDecoration(
+                                    hintText: "Raça",
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(fontSize: 18),
+                                  validator: (String? value) {
+                                    if (value!.isEmpty) {
+                                      return "Preencha o campo";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: DropdownButton<String>(
+                                      value: selectedClass,
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedClass = newValue!;
+                                        });
                                       },
-                                      icon: const Icon(Icons.remove)),
-                                  title: 
-                                     Text(
-                                      management.character!.name,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  trailing: 
-                                     Text(
-                                      management.character!.characterClass,
-                                      style: const TextStyle(fontSize: 16),
-                                    )
-                                );
-                              },
-                            ),
+                                      items: classes.map<DropdownMenuItem<String>>(
+                                          (String classe) {
+                                        return DropdownMenuItem<String>(
+                                            value: classe,
+                                            child: Text(
+                                              classe,
+                                              style: const TextStyle(fontSize: 18),
+                                            ));
+                                      }).toList())),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                        management!.add(
+                                            nameController.text,
+                                            ageController.text,
+                                            selectedClass,
+                                            raceController.text);
+                                        nameController.clear();
+                                        ageController.clear();
+                                        raceController.clear();
+                                      
+                                    }
+                                  },
+                                  child: const Text('Add')),
+                            ],
                           ),
                         ),
-                       /* CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.black,
-                          child: IconButton(
-                            tooltip: 'Deletar Todos',
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const AlertCustom();
-                                  });
-                            },
-                            icon: const Icon(Icons.clear_rounded,
-                                color: Colors.white),
-                            iconSize: 40,
-                          ),
-                        ),*/
-                      ],
-                    )),
-              ],
-            ),
-          ),
-        ),
-        drawer: const DrawerWidget()));
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Card(
+                              color: Colors.lime.shade50,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: management.charactersSheets.length,
+                                  itemBuilder: (context, index) {
+                                      management.character =
+                                        management.charactersSheets.elementAt(index);
+                                    return ListTile(
+                                      leading: IconButton(
+                                          onPressed: () {
+                                            management.deleteSelected(index);
+                                          },
+                                          icon: const Icon(Icons.remove)),
+                                      title: 
+                                         Text(
+                                          management!.character!.name,
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      trailing: 
+                                         Text(
+                                          management!.character!.characterClass,
+                                          style: const TextStyle(fontSize: 16),
+                                        )
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                           /* CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.black,
+                              child: IconButton(
+                                tooltip: 'Deletar Todos',
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return const AlertCustom();
+                                      });
+                                },
+                                icon: const Icon(Icons.clear_rounded,
+                                    color: Colors.white),
+                                iconSize: 40,
+                              ),
+                            ),*/
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            )
+            /*drawer: const DrawerWidget()*/);
+      }
+    );
   }
 }
