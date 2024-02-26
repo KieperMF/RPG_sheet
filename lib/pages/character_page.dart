@@ -21,8 +21,8 @@ class _CharacterPageState extends State<CharacterPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('Nome: ${characterSelected.name}'),
-            Text('Nome: ${characterSelected.characterClass}'),
-            Text('Nome: ${characterSelected.race}'),
+            Text('Classe: ${characterSelected.characterClass}'),
+            Text('Raça: ${characterSelected.race}'),
             ],
         ),
       ),
