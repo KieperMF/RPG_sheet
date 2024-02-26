@@ -25,7 +25,7 @@ class _AlertCustomState extends State<AlertCustom> {
             child: const Text("Cancelar")),
         TextButton(
             onPressed: () {
-               // management!.clear();
+              management.clear();
               Navigator.of(context).pop();
             },
             child: const Text("Excluir"))

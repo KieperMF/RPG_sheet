@@ -134,61 +134,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            Card(
-                              color: Colors.lime.shade50,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: management.charactersSheets.length,
-                                  itemBuilder: (context, index) {
-                                      management.character =
-                                        management.charactersSheets.elementAt(index);
-                                    return ListTile(
-                                      leading: IconButton(
-                                          onPressed: () {
-                                            management.deleteSelected(index);
-                                          },
-                                          icon: const Icon(Icons.remove)),
-                                      title: 
-                                         Text(
-                                          management.character!.name,
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      trailing: 
-                                         Text(
-                                          management.character!.characterClass,
-                                          style: const TextStyle(fontSize: 16),
-                                        )
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                           /* CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.black,
-                              child: IconButton(
-                                tooltip: 'Deletar Todos',
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return const AlertCustom();
-                                      });
-                                },
-                                icon: const Icon(Icons.clear_rounded,
-                                    color: Colors.white),
-                                iconSize: 40,
-                              ),
-                            ),*/
-                          ],
-                        )),
                   ],
                 ),
               ),

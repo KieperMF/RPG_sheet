@@ -2,17 +2,11 @@ import 'package:hive/hive.dart';
 import 'package:rpg_sheet/model_hive/character_model.dart';
 
 class CharacterService {  
-  CharacterService(){
-    _init();
-  }
 
   Box? box;
 
-  Future<void> _init() async {
-    Future.delayed(Duration(milliseconds: 500),()async{
+  Future<void> init() async {
       box = await Hive.openBox<Character>('charactersheet');
-    });
-    
   }
 
   addBox(String name, String age, String characterClass, String race)  {
@@ -32,8 +26,10 @@ class CharacterService {
 
    Future<List<Character>>  feedManagement() async{
     List<Character> listCharacters = [];
-      for (int i = 0; i < box!.length; i++) {
-        listCharacters.add(box!.getAt(i));
+    int i = 0;
+      while (box!.length > i) {
+        Character cha = box!.getAt(i);
+        listCharacters.add(cha);
         i++;
       }
       return listCharacters;

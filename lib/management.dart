@@ -14,7 +14,8 @@ abstract class ManagementBase with Store {
   final _characterService = CharacterService();
 
   Future<void> init() async{
-    Future.delayed(const Duration(microseconds: 1000),() async {
+    await _characterService.init();
+    Future.delayed(const Duration(microseconds: 400),() async {
       charactersSheets.addAll(await _characterService.feedManagement());
     });
     

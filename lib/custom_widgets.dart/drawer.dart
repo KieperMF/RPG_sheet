@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
 import 'package:rpg_sheet/management.dart';
 import 'package:rpg_sheet/pages/character_page.dart';
@@ -55,21 +54,17 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           children: [
                             SizedBox(
                               width: 90,
-                              child: Observer(builder: (_){
-                                return Text(
+                              child:  Text(
                                 management.character!.name,
                                 style: const TextStyle(fontSize: 18),
-                              );
-                              })
+                              )
                             ),
                             SizedBox(
                               width: 100,
-                              child: Observer(builder: (_){
-                                return Text(
+                              child: Text(
                                 management.character!.characterClass,
                                 style: const TextStyle(fontSize: 18),
-                              );
-                              })
+                              )
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
@@ -92,7 +87,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               padding: const EdgeInsets.only(left: 10),
                               child: IconButton(
                                   onPressed: () {
-                                    Observable(management.deleteSelected(index));
+                                    management.deleteSelected(index);
                                   },
                                   icon: const Icon(
                                     Icons.clear,
