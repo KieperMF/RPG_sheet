@@ -57,15 +57,6 @@ mixin _$Management on ManagementBase, Store {
     });
   }
 
-  late final _$addAsyncAction =
-      AsyncAction('ManagementBase.add', context: context);
-
-  @override
-  Future add(String name, String race, String age, String characterClass) {
-    return _$addAsyncAction
-        .run(() => super.add(name, race, age, characterClass));
-  }
-
   late final _$ManagementBaseActionController =
       ActionController(name: 'ManagementBase', context: context);
 
@@ -75,6 +66,17 @@ mixin _$Management on ManagementBase, Store {
         name: 'ManagementBase.deleteSelected');
     try {
       return super.deleteSelected(index);
+    } finally {
+      _$ManagementBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic add(String name, String age, String characterClass, String race) {
+    final _$actionInfo = _$ManagementBaseActionController.startAction(
+        name: 'ManagementBase.add');
+    try {
+      return super.add(name, age, characterClass, race);
     } finally {
       _$ManagementBaseActionController.endAction(_$actionInfo);
     }

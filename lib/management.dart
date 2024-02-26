@@ -7,7 +7,18 @@ part 'management.g.dart';
 class Management = ManagementBase with _$Management;
 
 abstract class ManagementBase with Store {
+  ManagementBase(){
+    init();
+  }
+
   final _characterService = CharacterService();
+
+  Future<void> init() async{
+    Future.delayed(const Duration(microseconds: 1000),() async {
+      charactersSheets.addAll(await _characterService.feedManagement());
+    });
+    
+  }
 
   @observable
   ObservableList<Character> charactersSheets = ObservableList.of([]);
@@ -25,13 +36,14 @@ abstract class ManagementBase with Store {
   }
 
   @action
-  add(String name, String race, String age, String characterClass) async{
-     final result = await _characterService.add(name, race, age, characterClass);
-     charactersSheets.add(result);
+  add(String name, String age, String characterClass, String race){
+    _characterService.addBox(name,age, characterClass,race);
+     charactersSheets.add(Character(name: name, age: age, characterClass: characterClass, race: race));
   }
 
   @action
   clear() {
-    _characterService.clear();
+    _characterService.clearBox();
+    charactersSheets.clear();
   }
 }

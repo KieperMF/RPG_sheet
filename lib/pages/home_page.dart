@@ -5,7 +5,6 @@ import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
 import 'package:rpg_sheet/management.dart';
 
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
