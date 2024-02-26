@@ -17,10 +17,12 @@ class _CharacterPageState extends State<CharacterPage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(characterSelected.name),
-            Text(characterSelected.characterClass),
-            Text(characterSelected.race)
+            Text('Nome: ${characterSelected.name}'),
+            Text('Nome: ${characterSelected.characterClass}'),
+            Text('Nome: ${characterSelected.race}'),
             ],
         ),
       ),
