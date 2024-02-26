@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
+import 'package:rpg_sheet/custom_widgets.dart/alert.dart';
 import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
 import 'package:rpg_sheet/management_mobx/management.dart';
 
@@ -134,6 +135,22 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                    CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.black,
+                  child: IconButton(
+                    tooltip: 'Deletar Todos',
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertCustom();
+                          });
+                    },
+                    icon: const Icon(Icons.clear_rounded, color: Colors.white),
+                    iconSize: 40,
+                  ),
+                ),
                   ],
                 ),
               ),
