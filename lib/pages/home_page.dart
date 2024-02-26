@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
 import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
-import 'package:rpg_sheet/management.dart';
+import 'package:rpg_sheet/management_mobx/management.dart';
 
 
 class HomePage extends StatefulWidget {

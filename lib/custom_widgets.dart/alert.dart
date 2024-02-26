@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rpg_sheet/management.dart';
+import 'package:rpg_sheet/management_mobx/management.dart';
 
 
 
