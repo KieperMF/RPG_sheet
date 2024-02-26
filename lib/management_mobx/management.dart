@@ -15,10 +15,11 @@ abstract class ManagementBase with Store {
 
   Future<void> init() async{
     await _characterService.init();
-    Future.delayed(const Duration(microseconds: 400),() async {
+    if(_characterService.feedManagement() == []){
+      _characterService.clearBox();
+    }else{
       charactersSheets.addAll(await _characterService.feedManagement());
-    });
-    
+    }
   }
 
   @observable
