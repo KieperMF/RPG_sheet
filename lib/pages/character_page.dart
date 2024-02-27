@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:rpg_sheet/boxes.dart';
 
 class CharacterPage extends StatefulWidget {
@@ -14,21 +16,35 @@ class _CharacterPageState extends State<CharacterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ficha do Personagem'),
+        backgroundColor: Colors.grey[300],
       ),
       body: Center(
         child: Row(children: [
-          const Column(
-            children: [],
+          Container(
+            color: Colors.black,
+            width: 100,
+            child: const Column(
+              children: [
+                Text(
+                  "Atributos",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                )
+              ],
+            ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('Nome: ${characterSelected.name}'),
-              Text('Classe: ${characterSelected.characterClass}'),
-              Text('Raça: ${characterSelected.race}'),
-            ],
-          )
+          Expanded(
+              child: Container(
+            color: Colors.lime[50],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Nome: ${characterSelected.name}', style:const TextStyle(fontSize: 18),),
+                Text('Classe: ${characterSelected.characterClass}', style:const TextStyle(fontSize: 18),),
+                Text('Raça: ${characterSelected.race}', style:const TextStyle(fontSize: 18),),
+              ],
+            ),
+          )),
         ]),
       ),
     );

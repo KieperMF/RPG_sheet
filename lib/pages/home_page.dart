@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
 import 'package:rpg_sheet/custom_widgets.dart/alert.dart';
 import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
@@ -22,9 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        return Scaffold(
+    return Scaffold(
             appBar: AppBar(
               title: const Text('Criação de Personagem'),
             ),
@@ -126,7 +123,6 @@ class _HomePageState extends State<HomePage> {
                                         nameController.clear();
                                         ageController.clear();
                                         raceController.clear();
-                                      
                                     }
                                   },
                                   child: const Text('Add')),
@@ -155,8 +151,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            drawer: const DrawerWidget());
-      }
+            drawer: const DrawerWidget()
     );
   }
 }

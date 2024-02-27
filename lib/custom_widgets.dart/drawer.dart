@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rpg_sheet/boxes.dart';
-import 'package:rpg_sheet/custom_widgets.dart/alert.dart';
 import 'package:rpg_sheet/management_mobx/management.dart';
 import 'package:rpg_sheet/pages/character_page.dart';
 
@@ -99,22 +98,35 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         ));
                   },
                 ),
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.black,
-                  child: IconButton(
-                    tooltip: 'Deletar Todos',
+                TextButton(
                     onPressed: () {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return const AlertCustom();
+                            return AlertDialog(
+                              content: const Text(
+                                  "Tem Certeza que deseja excluir todas as fichas?"),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text("Cancelar")),
+                                TextButton(
+                                    onPressed: () {
+                                      management.clear();
+
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text("Excluir"))
+                              ],
+                            );
                           });
                     },
-                    icon: const Icon(Icons.clear_rounded, color: Colors.white),
-                    iconSize: 40,
-                  ),
-                ),
+                    child: const Text(
+                      "Deletar todas",
+                      style: TextStyle(color: Colors.black),
+                    ))
               ],
             ],
           )));
