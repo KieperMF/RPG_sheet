@@ -16,15 +16,20 @@ class _CharacterPageState extends State<CharacterPage> {
         title: const Text('Ficha do Personagem'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('Nome: ${characterSelected.name}'),
-            Text('Classe: ${characterSelected.characterClass}'),
-            Text('Raça: ${characterSelected.race}'),
+        child: Row(children: [
+          const Column(
+            children: [],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('Nome: ${characterSelected.name}'),
+              Text('Classe: ${characterSelected.characterClass}'),
+              Text('Raça: ${characterSelected.race}'),
             ],
-        ),
+          )
+        ]),
       ),
     );
   }
