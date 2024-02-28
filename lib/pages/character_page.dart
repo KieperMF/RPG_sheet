@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rpg_sheet/boxes.dart';
+import 'package:rpg_sheet/services/boxes.dart';
 
 class CharacterPage extends StatefulWidget {
   const CharacterPage({super.key});

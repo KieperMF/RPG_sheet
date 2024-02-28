@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rpg_sheet/boxes.dart';
+import 'package:rpg_sheet/services/boxes.dart';
 import 'package:rpg_sheet/custom_widgets.dart/alert.dart';
 import 'package:rpg_sheet/custom_widgets.dart/drawer.dart';
+import 'package:rpg_sheet/custom_widgets.dart/saved_alert.dart';
 import 'package:rpg_sheet/management_mobx/management.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,115 +22,119 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
-              title: const Text('Criação de Personagem'),
-            ),
-            backgroundColor: Colors.grey[700],
-            body: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                        color: Colors.lime[50],
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: TextFormField(
-                                  controller: nameController,
-                                  decoration: const InputDecoration(
-                                    hintText: "Nome",
-                                  ),
-                                  style: const TextStyle(fontSize: 18),
-                                  textAlign: TextAlign.center,
-                                  validator: (String? value) {
-                                    if (value!.isEmpty) {
-                                      return "Preencha o campo";
-                                    }
-                                    return null;
-                                  },
-                                ),
+        appBar: AppBar(
+          title: const Text('Criação de Personagem'),
+        ),
+        backgroundColor: Colors.grey[700],
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Card(
+                    color: Colors.lime[50],
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              controller: nameController,
+                              decoration: const InputDecoration(
+                                hintText: "Nome",
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: TextFormField(
-                                  controller: ageController,
-                                  decoration: const InputDecoration(
-                                    hintText: "Idade",
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(fontSize: 18),
-                                  validator: (String? value) {
-                                    if (value!.isEmpty) {
-                                      return "Preencha o campo";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: TextFormField(
-                                  controller: raceController,
-                                  decoration: const InputDecoration(
-                                    hintText: "Raça",
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 18),
-                                  validator: (String? value) {
-                                    if (value!.isEmpty) {
-                                      return "Preencha o campo";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: DropdownButton<String>(
-                                      value: selectedClass,
-                                      onChanged: (String? newValue) {
-                                        setState(() {
-                                          selectedClass = newValue!;
-                                        });
-                                      },
-                                      items: classes.map<DropdownMenuItem<String>>(
-                                          (String classe) {
-                                        return DropdownMenuItem<String>(
-                                            value: classe,
-                                            child: Text(
-                                              classe,
-                                              style: const TextStyle(fontSize: 18),
-                                            ));
-                                      }).toList())),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              TextButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                        management.add(
-                                            nameController.text,
-                                            ageController.text,
-                                            selectedClass,
-                                            raceController.text);
-                                        nameController.clear();
-                                        ageController.clear();
-                                        raceController.clear();
-                                    }
-                                  },
-                                  child: const Text('Add')),
-                            ],
+                              style: const TextStyle(fontSize: 18),
+                              textAlign: TextAlign.center,
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return "Preencha o campo";
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              controller: ageController,
+                              decoration: const InputDecoration(
+                                hintText: "Idade",
+                              ),
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              style: const TextStyle(fontSize: 18),
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return "Preencha o campo";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              controller: raceController,
+                              decoration: const InputDecoration(
+                                hintText: "Raça",
+                              ),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(fontSize: 18),
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return "Preencha o campo";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: DropdownButton<String>(
+                                  value: selectedClass,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedClass = newValue!;
+                                    });
+                                  },
+                                  items: classes.map<DropdownMenuItem<String>>(
+                                      (String classe) {
+                                    return DropdownMenuItem<String>(
+                                        value: classe,
+                                        child: Text(
+                                          classe,
+                                          style: const TextStyle(fontSize: 18),
+                                        ));
+                                  }).toList())),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  management.add(
+                                      nameController.text,
+                                      ageController.text,
+                                      selectedClass,
+                                      raceController.text);
+                                  nameController.clear();
+                                  ageController.clear();
+                                  raceController.clear();
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          const SavedAlert());
+                                }
+                              },
+                              child: const Text('Add')),
+                        ],
                       ),
                     ),
-                    CircleAvatar(
+                  ),
+                ),
+                CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.black,
                   child: IconButton(
@@ -146,11 +150,10 @@ class _HomePageState extends State<HomePage> {
                     iconSize: 40,
                   ),
                 ),
-                  ],
-                ),
-              ),
+              ],
             ),
-            drawer: const DrawerWidget()
-    );
+          ),
+        ),
+        drawer: const DrawerWidget());
   }
 }
