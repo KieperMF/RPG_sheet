@@ -74,7 +74,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Padding(
-                
                                 padding: const EdgeInsets.all(15),
                                 child: TextFormField(
                                   controller: raceController,
