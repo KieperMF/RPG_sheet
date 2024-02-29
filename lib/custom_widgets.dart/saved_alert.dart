@@ -7,7 +7,7 @@ class SavedAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: const Text(
-        "Ficha Salva",
+        "Ficha Salva com Sucesso",
         style: TextStyle(fontSize: 18),
       ),
       actions: [
